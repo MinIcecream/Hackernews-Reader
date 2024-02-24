@@ -1,8 +1,6 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
-import Comments from './Comments';
-
+import App from './pages/App';
+import Comments from './pages/Comments';
 import {
     createBrowserRouter,
     RouterProvider,
