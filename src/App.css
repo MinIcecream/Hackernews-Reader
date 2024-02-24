@@ -11,7 +11,7 @@
 #heading{ 
     padding: 15px;
     width: 100%;
-    background-color: orange;
+    background-color: darkorange;
     color: white;
 }
 #Feed{
@@ -19,8 +19,13 @@
     width:100%; 
 }
 .Post{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 .postTitle{
     font-weight: bold;
+    line-height: 20%;
+} 
+.commentsLink{
+    text-decoration: none;
+    color: inherit;
 }

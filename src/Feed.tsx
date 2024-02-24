@@ -11,8 +11,7 @@ export default function Feed() {
             const data = await topIds.json();
             const topTenIds = data.slice(0,10); 
             const topTenStories = await Promise.all(topTenIds.map(async (element: string) => { 
-                const data = await IdToStory(element);
-                console.log(data);
+                const data = await IdToStory(element); 
                 return data; 
             }));
             setIds(topTenStories);  
@@ -23,7 +22,8 @@ export default function Feed() {
     }
     const IdToStory = async(id: string) =>{
         const story = await fetch("https://hacker-news.firebaseio.com/v0/item/" + id + ".json?print=pretty");
-        const data = await story.json();    
+        const data = await story.json();      
+        data.time = StringifyTime(data.time);
         return data;
     }
 
@@ -34,8 +34,29 @@ export default function Feed() {
     return(
         <div id ="Feed">
             {ids.map((post, index) =>(  
-                <div><Post key = {index+1} id={index+1} post={post} /> </div>
+                <div key = {index} ><Post id={index+1} post={post} /> </div>
             ))}
         </div>
     )
+}
+
+export function StringifyTime(time: number){
+    const currentTime = Math.floor(Date.now() / 1000);
+    let diff = currentTime - time;
+
+    let timePassed: string;
+
+    if (diff>3600){
+        timePassed = Math.floor(diff/3600).toString();
+        if (timePassed == "1"){
+            timePassed += " hour ago"
+        }
+        else{
+            timePassed += " hours ago";
+        }
+    }
+    else{ 
+        timePassed = Math.floor(diff/60).toString() + " minutes ago";
+    } 
+    return timePassed;
 }
